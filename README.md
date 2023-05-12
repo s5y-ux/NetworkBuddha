@@ -22,9 +22,14 @@ In summary, Network Buddha is a powerful and user-friendly program that combines
 
 ```bash
   sudo apt install nmap
+  
   sudo apt install tcpdump
+  
   git clone https://github.com/s5y-ux/Network_Buddha
+  
   cd Network_Buddha/
+  
   gcc Buddah.cpp -lstdc++
+  
   ./a.out
 ```
