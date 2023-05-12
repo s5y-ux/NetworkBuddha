@@ -18,3 +18,13 @@ In summary, Network Buddha is a powerful and user-friendly program that combines
 
 ## Screenshot
 ![Screenshot at 2023-05-11 20-41-44](https://github.com/s5y-ux/Network_Buddha/assets/59636597/7e080a26-c4ac-4640-9363-f5c306ba93d9)
+## Install
+
+```bash
+  sudo apt install nmap
+  sudo apt install tcpdump
+  git clone https://github.com/s5y-ux/Network_Buddha
+  cd Network_Buddha/
+  gcc Buddah.cpp -lstdc++
+  ./a.out
+```
