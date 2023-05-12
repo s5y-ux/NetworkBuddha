@@ -15,3 +15,6 @@ Network Buddha also includes a ping functionality that enables users to test the
 Furthermore, Network Buddha offers a convenient system networking information display, providing users with a comprehensive overview of a device's network configuration. This includes information such as IP address, subnet mask, default gateway, DNS server, MAC address, and more. With this feature, users can quickly gather essential networking details, facilitating troubleshooting and network management tasks.
 
 In summary, Network Buddha is a powerful and user-friendly program that combines IP scanning, port scanning, TCP traffic monitoring, ping functionality, and system networking information display. With its array of features, Network Buddha empowers users to efficiently manage and secure their networks while ensuring optimal performance and connectivity.
+
+## Screenshot
+![Screenshot at 2023-05-11 20-41-44](https://github.com/s5y-ux/Network_Buddha/assets/59636597/7e080a26-c4ac-4640-9363-f5c306ba93d9)
