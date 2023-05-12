@@ -36,59 +36,26 @@
 using namespace std;
 
 //Vector used as dynamic array to store our logo
-vector < string > Logo_reference;
+vector < string > Logo_Variable;
 
 //String for IP address input (referenced through pointers)
-string Ip_Address;
+string GLOBAL_IP_Referencer;
 
 //Integer used for our answer to the prompt (referenced through pointers)
-int Prompt_Answer;
+int GLOBAL_Prompt_Response;
 
 //String for IP address input (referenced through pointers)
-string command;
+string GLOBAL_System_Command;
 
 //File used to denote the ASCII logo of the program (Can be changed)
 ifstream Logo("Logo.txt");
-
-
-//Function used to display the logo
-void Display_Logo() {
-
-  //System command used to clear the CLI
-  system("clear");
-
-  //Iterates through the dynamic array and outputs the corresponding lines.
-  for (int i = 0; i < Logo_reference.size(); i++) {
-    cout << Logo_reference.at(i);
-  }
-}
-
-//Function for loading the logo into the dynamic array
-void Load_Logo() {
-
-  //Used to store the lines as string
-  string line;
-
-  //Logic check to see if our file was found
-  if (Logo.is_open()) {
-
-    //Appends line to dynamic array
-    while (getline(Logo, line)) {
-      Logo_reference.push_back(line + "\n");
-    }
-
-    Logo.close();
-
-    //If the logic check fails, display unable.
-  } else cout << "Unable to open file";
-}
 
 //Custom object for our menu
 class Menu_Object {
 
   //Used as a switch for determining which menu we are in
   //(Acts as a 2 layer binary tree)
-  private: bool Sub_Menu;
+  private: bool In_Selection;
 
   //Used to store the menu name
   string Class_Title;
@@ -118,29 +85,66 @@ class Menu_Object {
   //Initalization method for private variables
   Menu_Object(string Title, bool Menu_Type) {
     Class_Title = Title;
-    Sub_Menu = Menu_Type;
+    In_Selection = Menu_Type;
   }
 
   //returns the menu condition for the selection loop
   bool return_menu_condition() {
-    return (Sub_Menu);
+    return (In_Selection);
   }
 
   //sets the condition of the loop (i.e false -> exit)
   void set_condition(bool new_value) {
-    Sub_Menu = new_value;
+    In_Selection = new_value;
   }
 };
+
+//Function used to display the logo
+void Display_Logo() {
+
+  //System GLOBAL_System_Command used to clear the CLI
+  system("clear");
+
+  //Iterates through the dynamic array and outputs the corresponding lines.
+  for (int i = 0; i < Logo_Variable.size(); i++) {
+    cout << Logo_Variable.at(i);
+  }
+}
+
+//Function for loading the logo into the dynamic array
+void Load_Logo() {
+
+  //Used to store the lines as string
+  string line;
+
+  //Logic check to see if our file was found
+  if (Logo.is_open()) {
+
+    //Appends line to dynamic array
+    while (getline(Logo, line)) {
+      Logo_Variable.push_back(line + "\n");
+    }
+
+    Logo.close();
+
+    //If the logic check fails, display unable.
+  } else cout << "Unable to open file";
+}
+
+void Title_Procedure(Menu_Object Menu_Parameter){
+  Display_Logo();
+  Menu_Parameter.Decor();
+}
 
 //Function used for IP Scanning through N-Map
 void Ip_Scan(string Scan_Type) {
 
-  //Pointers to reference IP address and command c string.
-  string * IP_Assign, * command_p;
+  //Pointers to reference IP address and GLOBAL_System_Command c string.
+  string * IP_Assign, * System_Pointer;
 
   //Points to the address of the respective variables
-  IP_Assign = & Ip_Address;
-  command_p = & command;
+  IP_Assign = & GLOBAL_IP_Referencer;
+  System_Pointer = & GLOBAL_System_Command;
 
   //Asks the user for input
   cout << "Ip Address: ";
@@ -150,45 +154,45 @@ void Ip_Scan(string Scan_Type) {
   if (Scan_Type == "Local") {
 
     //Scans through all posible connected clients (N-Map)
-    * command_p = "nmap -sn " + Ip_Address + "/24";
+    * System_Pointer = "nmap -sn " + GLOBAL_IP_Referencer + "/24";
   } else if (Scan_Type == "External") {
 
     //Scans with probe blocking argument (N-Map)
-    * command_p = "nmap -Pn " + Ip_Address;
+    * System_Pointer = "nmap -Pn " + GLOBAL_IP_Referencer;
   } else if (Scan_Type == "Port") {
 
     //Runs a scan to see TCP Ports
-    * command_p = "nmap -V -A " + Ip_Address + " -Pn";
+    * System_Pointer = "nmap -V -A " + GLOBAL_IP_Referencer + " -Pn";
   }
 
-  //Converts command to c_str() as needed for the system parameter
-  system(command.c_str());
+  //Converts GLOBAL_System_Command to c_str() as needed for the system parameter
+  system(GLOBAL_System_Command.c_str());
 }
 
 //Function for all of our OS networking info
-void Basic_Net_Commands(string command_Input) {
+void Basic_Net_Commands(string GLOBAL_System_Command_Input) {
 
   //Again, allocating pointers
-  string * IP_Assign, * command_p;
+  string * IP_Assign, * System_Pointer;
 
   //Setting pointers to respective variable address
-  IP_Assign = & Ip_Address;
-  command_p = & command;
+  IP_Assign = & GLOBAL_IP_Referencer;
+  System_Pointer = & GLOBAL_System_Command;
 
   //Why diden't I use a switch statement? Ease of reading the parameter.
-  if (command_Input == "Ping") {
+  if (GLOBAL_System_Command_Input == "Ping") {
 
     //Input and output for setting IP address.
     cout << "IP Address >: ";
-    cin >> Ip_Address;
+    cin >> GLOBAL_IP_Referencer;
 
-    //Asigns c string to pointer which points to address &command
-    * command_p = "ping " + Ip_Address;
+    //Asigns c string to pointer which points to address &GLOBAL_System_Command
+    * System_Pointer = "ping " + GLOBAL_IP_Referencer;
 
-    //Executes command as c string.
-    system(command.c_str());
+    //Executes GLOBAL_System_Command as c string.
+    system(GLOBAL_System_Command.c_str());
 
-  } else if (command_Input == "Config") {
+  } else if (GLOBAL_System_Command_Input == "Config") {
     system("ifconfig");
   }
 }
@@ -203,11 +207,10 @@ void Nmap_Menu(Menu_Object Menu_Parameter) {
 
   //Allocates pointer to point to prompt answer
   int * answer;
-  answer = & Prompt_Answer;
+  answer = & GLOBAL_Prompt_Response;
 
   //Used in combination to print the logo and menu name
-  Display_Logo();
-  Menu_Parameter.Decor();
+  Title_Procedure(Menu_Parameter);
 
   //Loop for menu
   while (Menu_Parameter.return_menu_condition()) {
@@ -215,23 +218,23 @@ void Nmap_Menu(Menu_Object Menu_Parameter) {
     //Outputs the different options that exist for Nmap
     cout << "\n[0: Ip Scanner, 1: Port Scanner, 2: Exit]\n";
 
-    //Takes user input and stores it in the pointer value that points to Prompt_Answer
+    //Takes user input and stores it in the pointer value that points to GLOBAL_Prompt_Response
     cout << "Operation >: ";
     cin >> * answer;
 
     //Looks at the value stored in the variable
-    switch (Prompt_Answer) {
+    switch (GLOBAL_Prompt_Response) {
     case 0:
 
       //Lists Options
       cout << "[0: Local, 1: External]\n";
 
-      //Takes user input and assigns anser to value stored at &Prompt_Answer
+      //Takes user input and assigns anser to value stored at &GLOBAL_Prompt_Response
       cout << "Operation >: ";
       cin >> * answer;
 
       //Runs an IP scan with the respective option
-      if (Prompt_Answer == 0) {
+      if (GLOBAL_Prompt_Response == 0) {
 
         //Pretty good reason to have a string as the parameter ;)
         Ip_Scan("Local");
@@ -255,32 +258,31 @@ void Nmap_Menu(Menu_Object Menu_Parameter) {
   }
 }
 
-//Used as the menu for basic network commands
-void Net_Info_Menu(Menu_Object Net_Parameter) {
+//Used as the menu for basic network GLOBAL_System_Commands
+void Net_Info_Menu(Menu_Object Menu_Parameter) {
 
   //Checks to see if our menu object is activated
-  if (Net_Parameter.return_menu_condition() == false) {
-    Net_Parameter.set_condition(true);
+  if (Menu_Parameter.return_menu_condition() == false) {
+    Menu_Parameter.set_condition(true);
   }
 
-  //Assigns pointer to the Prompt_Answer
+  //Assigns pointer to the GLOBAL_Prompt_Response
   int * answer;
-  answer = & Prompt_Answer;
+  answer = & GLOBAL_Prompt_Response;
 
   //Displays Logo + Menu title
-  Display_Logo();
-  Net_Parameter.Decor();
+  Title_Procedure(Menu_Parameter);
 
   //Loop used for menu selection
-  while (Net_Parameter.return_menu_condition()) {
+  while (Menu_Parameter.return_menu_condition()) {
 
-    //Displays options and io for value at &Prompt_Answer
+    //Displays options and io for value at &GLOBAL_Prompt_Response
     cout << "\n[0: Info, 1: Ping, 2: Exit]\n";
     cout << "Operation >: ";
     cin >> * answer;
 
-    //Checks the value of *answer (answer = &Prompt_Answer)
-    switch ( Prompt_Answer ) {
+    //Checks the value of *answer (answer = &GLOBAL_Prompt_Response)
+    switch ( GLOBAL_Prompt_Response ) {
     case 0:
 
       //Pretty good reason to have a string as the parameter ;)
@@ -292,7 +294,7 @@ void Net_Info_Menu(Menu_Object Net_Parameter) {
     case 2:
 
       //Exits out of the loop
-      Net_Parameter.set_condition(false);
+      Menu_Parameter.set_condition(false);
       break;
     default:
       cout << "Unknwon Command please refer to above options\n";
@@ -306,20 +308,19 @@ void Main_Menu(Menu_Object Main_Menu, Menu_Object Nmap_Me, Menu_Object Net_Me) {
 
   //Same setup for obtaining user input
   int * answer;
-  answer = & Prompt_Answer;
+  answer = & GLOBAL_Prompt_Response;
 
   //Procedure for displaying logo and menu title
-  Display_Logo();
-  Main_Menu.Decor();
+  Title_Procedure(Main_Menu);
 
   //Loop for simulating main menu
   while (Main_Menu.return_menu_condition()) {
     cout << "\n[0: Version, 1: Nmap, 2: TCP Dump, 3: Net information, 4: Exit]\n";
     cout << "Operation >: ";
 
-    //Stores input as reference to value stored at address &Prompt_Answer
+    //Stores input as reference to value stored at address &GLOBAL_Prompt_Response
     cin >> * answer;
-    switch ( Prompt_Answer ) {
+    switch ( GLOBAL_Prompt_Response ) {
     case 0:
 
       //Case for Nmap version
@@ -331,8 +332,7 @@ void Main_Menu(Menu_Object Main_Menu, Menu_Object Nmap_Me, Menu_Object Net_Me) {
       Nmap_Menu(Nmap_Me);
 
       //Procedure for displaying logo and menu title after stopping loop
-      Display_Logo();
-      Main_Menu.Decor();
+      Title_Procedure(Main_Menu);
       break;
     case 2:
 
@@ -345,13 +345,12 @@ void Main_Menu(Menu_Object Main_Menu, Menu_Object Nmap_Me, Menu_Object Net_Me) {
       Net_Info_Menu(Net_Me);
 
       //Procedure for displaying logo and menu title after stopping loop
-      Display_Logo();
-      Main_Menu.Decor();
+      Title_Procedure(Main_Menu);
       break;
     case 4:
       exit(1);
     default:
-      cout << "Unknwon Command, type 0 for list of commands\n";
+      cout << "Unknwon Command, type 0 for list of GLOBAL_System_Commands\n";
       break;
     }
   }
