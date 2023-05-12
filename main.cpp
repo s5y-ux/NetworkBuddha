@@ -8,10 +8,10 @@
 * Programmed By: Joseph R. Shumaker                                            *
 *                                                                              *
 * Purpose: This project was made to appeal to a possible internship            *
-* at JPL, This project is a demonstration of my current abillities in C++      *
-* reguarding functions, i/o, and memory allocation. This project was made      *
-* purely in C++ and features the system function to execute linux commands     *
-* that are used on a regular basis for networking operations.                  *
+* at JPL, This project is a demonstration of my current abilities in C++       *
+* regarding functions, i/o, and memory allocation. This project was made      *
+* purely in C++ and features the system function to execute Linux commands     *
+* that are used regularly for networking operations.                           *
 *                                                                              *
 * All code seen below is my original work and all information regarding the    *
 * use of library-specific methods and attributes were learned directly from    *
@@ -32,14 +32,14 @@
 #include <string>
 #include <vector>
 
-//Using the standard namespace (No need for resolution scope operator)
+//Using the standard name-space (No need for resolution scope operator)
 using namespace std;
 
 //Vector used as dynamic array to store our logo
 vector < string > Logo_Variable;
 
 //String for IP address input (referenced through pointers)
-string GLOBAL_IP_Referencer;
+string GLOBAL_IP_Reference;
 
 //Integer used for our answer to the prompt (referenced through pointers)
 int GLOBAL_Prompt_Response;
@@ -82,7 +82,7 @@ class Menu_Object {
     cout << "*\n";
   }
 
-  //Initalization method for private variables
+  //Initialization method for private variables
   Menu_Object(string Title, bool Menu_Type) {
     Class_Title = Title;
     In_Selection = Menu_Type;
@@ -143,26 +143,26 @@ void Ip_Scan(string Scan_Type) {
   string * IP_Assign, * System_Pointer;
 
   //Points to the address of the respective variables
-  IP_Assign = & GLOBAL_IP_Referencer;
+  IP_Assign = & GLOBAL_IP_Reference;
   System_Pointer = & GLOBAL_System_Command;
 
   //Asks the user for input
   cout << "Ip Address: ";
   cin >> * IP_Assign;
 
-  //Why diden't I use a switch statement? Ease of reading the parameter.
+  //Why didn't I use a switch statement? Ease of reading the parameter.
   if (Scan_Type == "Local") {
 
-    //Scans through all posible connected clients (N-Map)
-    * System_Pointer = "nmap -sn " + GLOBAL_IP_Referencer + "/24";
+    //Scans through all possible connected clients (N-Map)
+    * System_Pointer = "nmap -sn " + GLOBAL_IP_Reference + "/24";
   } else if (Scan_Type == "External") {
 
     //Scans with probe blocking argument (N-Map)
-    * System_Pointer = "nmap -Pn " + GLOBAL_IP_Referencer;
+    * System_Pointer = "nmap -Pn " + GLOBAL_IP_Reference;
   } else if (Scan_Type == "Port") {
 
     //Runs a scan to see TCP Ports
-    * System_Pointer = "nmap -V -A " + GLOBAL_IP_Referencer + " -Pn";
+    * System_Pointer = "nmap -V -A " + GLOBAL_IP_Reference + " -Pn";
   }
 
   //Converts GLOBAL_System_Command to c_str() as needed for the system parameter
@@ -176,18 +176,18 @@ void Basic_Net_Commands(string GLOBAL_System_Command_Input) {
   string * IP_Assign, * System_Pointer;
 
   //Setting pointers to respective variable address
-  IP_Assign = & GLOBAL_IP_Referencer;
+  IP_Assign = & GLOBAL_IP_Reference;
   System_Pointer = & GLOBAL_System_Command;
 
-  //Why diden't I use a switch statement? Ease of reading the parameter.
+  //Why didn't I use a switch statement? Ease of reading the parameter.
   if (GLOBAL_System_Command_Input == "Ping") {
 
     //Input and output for setting IP address.
     cout << "IP Address >: ";
-    cin >> GLOBAL_IP_Referencer;
+    cin >> GLOBAL_IP_Reference;
 
-    //Asigns c string to pointer which points to address &GLOBAL_System_Command
-    * System_Pointer = "ping " + GLOBAL_IP_Referencer;
+    //Assigns c string to pointer which points to address &GLOBAL_System_Command
+    * System_Pointer = "ping " + GLOBAL_IP_Reference;
 
     //Executes GLOBAL_System_Command as c string.
     system(GLOBAL_System_Command.c_str());
@@ -229,7 +229,7 @@ void Nmap_Menu(Menu_Object Menu_Parameter) {
       //Lists Options
       cout << "[0: Local, 1: External]\n";
 
-      //Takes user input and assigns anser to value stored at &GLOBAL_Prompt_Response
+      //Takes user input and assigns answer to value stored at &GLOBAL_Prompt_Response
       cout << "Operation >: ";
       cin >> * answer;
 
@@ -276,7 +276,7 @@ void Net_Info_Menu(Menu_Object Menu_Parameter) {
   //Loop used for menu selection
   while (Menu_Parameter.return_menu_condition()) {
 
-    //Displays options and io for value at &GLOBAL_Prompt_Response
+    //Displays options and I/O for value at &GLOBAL_Prompt_Response
     cout << "\n[0: Info, 1: Ping, 2: Exit]\n";
     cout << "Operation >: ";
     cin >> * answer;
@@ -350,7 +350,7 @@ void Main_Menu(Menu_Object Main_Menu, Menu_Object Nmap_Me, Menu_Object Net_Me) {
     case 4:
       exit(1);
     default:
-      cout << "Unknwon Command, type 0 for list of GLOBAL_System_Commands\n";
+      cout << "Unknown Command, type 0 for list of GLOBAL_System_Commands\n";
       break;
     }
   }
@@ -359,7 +359,7 @@ void Main_Menu(Menu_Object Main_Menu, Menu_Object Nmap_Me, Menu_Object Net_Me) {
 int main() {
   Load_Logo();
 
-  //Initalizes our menu object
+  //Initializes our menu object
   Menu_Object mainMen("Main Menu", true);
   Menu_Object nmap_Menu("Nmap", true);
   Menu_Object net_Menu("Basic Interface", true);
