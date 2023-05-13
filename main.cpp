@@ -162,7 +162,7 @@ void Ip_Scan(string Scan_Type) {
   } else if (Scan_Type == "Port") {
 
     //Runs a scan to see TCP Ports
-    * System_Pointer = "nmap -V -A " + GLOBAL_IP_Reference + " -Pn";
+    * System_Pointer = "nmap -v -Pn " + GLOBAL_IP_Reference;
   }
 
   //Converts GLOBAL_System_Command to c_str() as needed for the system parameter
