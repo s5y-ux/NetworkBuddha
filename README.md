@@ -1,5 +1,6 @@
 ![buddha-on-lotus-free-vector](https://github.com/s5y-ux/Network_Buddha/assets/59636597/9bf27e19-5742-4fbb-92b8-a7ecb54b68da)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+
 # Network Buddha
 
 Network Buddha is a comprehensive software program designed to empower users with advanced network scanning and monitoring capabilities. With its intuitive interface and powerful features, Network Buddha enables users to gain deep insights into their network infrastructure, troubleshoot connectivity issues, and enhance network security.
@@ -18,6 +19,7 @@ In summary, Network Buddha is a powerful and user-friendly program that combines
 
 ## Screenshot
 ![Screenshot at 2023-05-11 20-41-44](https://github.com/s5y-ux/Network_Buddha/assets/59636597/7e080a26-c4ac-4640-9363-f5c306ba93d9)
+
 ## Install
 
 ```bash
@@ -33,3 +35,8 @@ In summary, Network Buddha is a powerful and user-friendly program that combines
   
   ./a.out
 ```
+
+## Video Demonstration
+
+https://github.com/s5y-ux/Network_Buddha/assets/59636597/394377a0-4b7c-4323-8718-55d9296d9710
+
