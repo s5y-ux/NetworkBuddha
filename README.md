@@ -3,7 +3,7 @@
 
 # Network Buddha
 
-Network Buddha is a comprehensive software program designed to empower users with advanced network scanning and monitoring capabilities. With its intuitive interface and powerful features, Network Buddha enables users to gain deep insights into their network infrastructure, troubleshoot connectivity issues, and enhance network security.
+Network Buddha is a comprehensive software program designed to empower users with basic network scanning and monitoring capabilities. With its intuitive interface and powerful features, Network Buddha enables users to gain deep insights into their network infrastructure, troubleshoot connectivity issues, and enhance network security using technologies like Nmap and TCPdump.
 
 The IP scanning functionality of Network Buddha allows users to scan a range of IP addresses or an entire network, providing a detailed overview of the connected devices. By swiftly detecting active hosts, Network Buddha helps users identify potential vulnerabilities and detect unauthorized devices on the network. This feature is particularly useful for network administrators and security professionals to ensure the integrity and safety of their network.
 
