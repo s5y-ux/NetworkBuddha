@@ -39,4 +39,3 @@ In summary, Network Buddha is a powerful and user-friendly program that combines
 ## Video Demonstration
 
 https://github.com/s5y-ux/Network_Buddha/assets/59636597/394377a0-4b7c-4323-8718-55d9296d9710
-t
