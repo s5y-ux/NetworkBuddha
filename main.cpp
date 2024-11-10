@@ -26,6 +26,8 @@
 *                                                                              *
 *******************************************************************************/
 
+//I don't remember shit about C++ Lol
+
 //Standard Librarys for C++
 #include <iostream>
 #include <fstream>
